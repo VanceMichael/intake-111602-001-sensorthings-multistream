@@ -1,0 +1,96 @@
+{
+  "phases": [
+    {
+      "routes": [
+        {
+          "path": "/observations/101",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"@iot.id\": 101, \"phenomenonTime\": \"2026-10-12T01:00:00Z\", \"result\": 23.4, \"Datastream\": {\"@iot.id\": 7, \"unitOfMeasurement\": {\"symbol\": \"Cel\"}, \"ObservedProperty\": {\"@iot.id\": 9, \"name\": \"温度\"}}, \"parameters\": {\"definition\": \"station-a:3\"}}"
+        },
+        {
+          "path": "/Datastreams(7)/Observations",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"value\": [{\"@iot.id\": 101, \"phenomenonTime\": \"2026-10-12T01:00:00Z\", \"result\": 23.4, \"Datastream\": {\"@iot.id\": 7, \"unitOfMeasurement\": {\"symbol\": \"Cel\"}, \"ObservedProperty\": {\"@iot.id\": 9, \"name\": \"温度\"}}, \"parameters\": {\"definition\": \"station-a:3\"}}], \"@iot.nextLink\": \"/Datastreams(7)/Observations?$skip=1\"}"
+        },
+        {
+          "path": "/Datastreams(7)/Observations?$skip=1",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"value\": [{\"@iot.id\": 102, \"phenomenonTime\": \"2026-10-12T01:00:00Z\", \"result\": null, \"Datastream\": {\"@iot.id\": 7, \"unitOfMeasurement\": {\"symbol\": \"Cel\"}, \"ObservedProperty\": {\"@iot.id\": 9, \"name\": \"温度\"}}, \"parameters\": {\"definition\": \"station-a:3\"}}]}"
+        },
+        {
+          "path": "/MultiDatastreams(8)/Observations?$resultFormat=dataArray",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"value\": [{\"MultiDatastream@iot.navigationLink\": \"/MultiDatastreams(8)\", \"components\": [\"id\", \"phenomenonTime\", \"result\"], \"dataArray\": [[201, \"2026-10-12T01:00:00Z\", [22.1, 61]], [202, \"2026-10-12T01:01:00Z\", [null, 62]]]}]}"
+        },
+        {
+          "path": "/MultiDatastreams(8)",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"@iot.id\": 8, \"multiObservationDataTypes\": [\"OM_Measurement\", \"OM_Measurement\"], \"unitOfMeasurements\": [{\"symbol\": \"Cel\"}, {\"symbol\": \"%\"}], \"ObservedProperties\": [{\"@iot.id\": 9, \"name\": \"温度\"}, {\"@iot.id\": 10, \"name\": \"湿度\"}], \"properties\": {\"definition\": \"station-a:3\"}}"
+        },
+        {
+          "path": "/definitions/station-a:4",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"order\": [10, 9], \"units\": [\"%\", \"Cel\"], \"sensor\": \"sensor-2\"}"
+        }
+      ]
+    },
+    {
+      "routes": [
+        {
+          "path": "/observations/101",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"@iot.id\": 101, \"phenomenonTime\": \"2026-10-12T01:00:00Z\", \"result\": 24.1, \"Datastream\": {\"@iot.id\": 7, \"unitOfMeasurement\": {\"symbol\": \"Cel\"}, \"ObservedProperty\": {\"@iot.id\": 9, \"name\": \"温度\"}}, \"parameters\": {\"definition\": \"station-a:4\"}}"
+        },
+        {
+          "path": "/Datastreams(7)/Observations",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"value\": [{\"@iot.id\": 101, \"phenomenonTime\": \"2026-10-12T01:00:00Z\", \"result\": 23.4, \"Datastream\": {\"@iot.id\": 7, \"unitOfMeasurement\": {\"symbol\": \"Cel\"}, \"ObservedProperty\": {\"@iot.id\": 9, \"name\": \"温度\"}}, \"parameters\": {\"definition\": \"station-a:3\"}}], \"@iot.nextLink\": \"/Datastreams(7)/Observations?$skip=1\"}"
+        },
+        {
+          "path": "/Datastreams(7)/Observations?$skip=1",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"value\": [{\"@iot.id\": 102, \"phenomenonTime\": \"2026-10-12T01:00:00Z\", \"result\": null, \"Datastream\": {\"@iot.id\": 7, \"unitOfMeasurement\": {\"symbol\": \"Cel\"}, \"ObservedProperty\": {\"@iot.id\": 9, \"name\": \"温度\"}}, \"parameters\": {\"definition\": \"station-a:3\"}}]}"
+        },
+        {
+          "path": "/MultiDatastreams(8)/Observations?$resultFormat=dataArray",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"value\": [{\"MultiDatastream@iot.navigationLink\": \"/MultiDatastreams(8)\", \"components\": [\"id\", \"phenomenonTime\", \"result\"], \"dataArray\": [[201, \"2026-10-12T01:00:00Z\", [22.1, 61]], [202, \"2026-10-12T01:01:00Z\", [null, 62]]]}]}"
+        },
+        {
+          "path": "/MultiDatastreams(8)",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"@iot.id\": 8, \"multiObservationDataTypes\": [\"OM_Measurement\", \"OM_Measurement\"], \"unitOfMeasurements\": [{\"symbol\": \"Cel\"}, {\"symbol\": \"%\"}], \"ObservedProperties\": [{\"@iot.id\": 9, \"name\": \"温度\"}, {\"@iot.id\": 10, \"name\": \"湿度\"}], \"properties\": {\"definition\": \"station-a:3\"}}"
+        },
+        {
+          "path": "/definitions/station-a:4",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"order\": [10, 9], \"units\": [\"%\", \"Cel\"], \"sensor\": \"sensor-2\"}"
+        }
+      ]
+    }
+  ]
+}
