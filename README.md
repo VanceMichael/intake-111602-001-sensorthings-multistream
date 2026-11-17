@@ -17,9 +17,11 @@ npm run demo
 
 需要交互时分别运行 `npm run source` 与 `npm start`。来源默认监听本机 4310 端口，应用默认监听 4320；可用 `PORT`、`SOURCE_URL`、`DATA_DIR` 配置。`GET /preview` 获取预览，`POST /receipts` 接收当前资料，`GET /receipts` 查询凭据，`GET /objects/<摘要>` 回读原件。应用只允许配置到本机的资料服务。
 
+`POST /collections` 按观测流领取资料，请求体 `{"path": "/Datastreams(7)/Observations"}` 或 `{"path": "/MultiDatastreams(8)/Observations"}`，普通流与多维流都支持；同一流重复调用即为继续领取，可补齐此前缺失的解释资料并追踪更正。`GET /collections` 列出各流采集结果，`GET /collections/<标识>` 回读可用观测集：每条读数注明采用的属性、单位及传感器资料版本，缺少解释依据的数值不进入可用集，并区分没有观测、明确空值与暂时缺失。
+
 ## 目录
 
-`source/` 负责资料源的发布日期和传输状态；`src/decode.mjs` 解释一份来源资料；`src/catalog.mjs` 管理不可变原件及接收凭据；`src/app.mjs` 提供查看服务。资料含义及来源控制见 `docs/资料接口.md`。
+`source/` 负责资料源的发布日期和传输状态；`src/decode.mjs` 解释一份来源资料；`src/catalog.mjs` 管理不可变原件及接收凭据；`src/collect.mjs` 按观测流领取、解释并追踪更正；`src/app.mjs` 提供查看服务。资料含义及来源控制见 `docs/资料接口.md`。
 
 ## 容器
 
