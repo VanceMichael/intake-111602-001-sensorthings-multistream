@@ -10,7 +10,9 @@ export function dispatch({ url, phase }) {
     const skip = Number(url.searchParams.get('$skip') || 0);
     if (![0, 1].includes(skip)) return { status: 400, json: { error: '不支持此页位置' } };
     return { json: { value: [{ '@iot.id': 101 + skip, phenomenonTime: '2026-10-12T01:00:00Z',
-      result: skip ? null : phase ? 24.1 : 23.4, Datastream: { '@iot.id': 7 },
+      result: skip ? null : phase ? 24.1 : 23.4,
+      Datastream: { '@iot.id': 7, unitOfMeasurement: { symbol: 'Cel', name: 'degree Celsius' },
+        ObservedProperty: { '@iot.id': 9, name: '温度' } },
       parameters: { definition: `station-a:${phase + 3}`, revision: phase + 1 } }],
       ...(skip ? {} : { '@iot.nextLink': '/Datastreams(7)/Observations?$skip=1' }) } };
   }

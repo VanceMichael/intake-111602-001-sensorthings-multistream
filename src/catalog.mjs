@@ -11,6 +11,7 @@ export class Catalog {
   async initialize() {
     await mkdir(join(this.root, 'objects'), { recursive: true });
     await mkdir(join(this.root, 'receipts'), { recursive: true });
+    await mkdir(join(this.root, 'intake'), { recursive: true });
     return this;
   }
 
@@ -60,5 +61,32 @@ export class Catalog {
     const bytes = await readFile(join(this.root, 'objects', digest));
     if (createHash('sha256').update(bytes).digest('hex') !== digest) throw new Error('原件校验失败');
     return bytes;
+  }
+
+  // 采集任务状态是独立于原件的本地工作状态，按流编号落盘，重开目录后仍可继续领取。
+  intakePath(key) {
+    if (!/^[a-zA-Z0-9:_-]+$/.test(key)) throw new Error('无效的采集任务编号');
+    return join(this.root, 'intake', `${key}.json`);
+  }
+
+  async saveIntake(key, state) {
+    await this.initialize();
+    await this.atomic(this.intakePath(key), Buffer.from(JSON.stringify(state, null, 2)));
+  }
+
+  async readIntake(key) {
+    await this.initialize();
+    try {
+      return JSON.parse(await readFile(this.intakePath(key), 'utf8'));
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+      return null;
+    }
+  }
+
+  async listIntake() {
+    await this.initialize();
+    const files = (await readdir(join(this.root, 'intake'))).filter(name => name.endsWith('.json')).sort();
+    return Promise.all(files.map(name => readFile(join(this.root, 'intake', name), 'utf8').then(JSON.parse)));
   }
 }
